@@ -1,0 +1,21 @@
+int buttonPin = 2;
+int count = 0;
+int lastState = HIGH;
+
+void setup() {
+  pinMode(buttonPin, INPUT_PULLUP);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int currentState = digitalRead(buttonPin);
+
+  if (lastState == HIGH && currentState == LOW) {
+    count++;
+    Serial.print("Button Press Count: ");
+    Serial.println(count);
+    delay(300); // debounce
+  }
+
+  lastState = currentState;
+}
